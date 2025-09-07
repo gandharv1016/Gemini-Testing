@@ -72,7 +72,7 @@ int main() {
 
     // Traverse and print the linked list after deletion
     cout << "After deleting 2: ";
-    traverseLinkedList(head);
+ 
 
     return 0;
 }
