@@ -1,9 +1,12 @@
 {
   "tasks": {
     "review": {
-      "description": "Review pull requests",
-      "prompt": "You are a code reviewer. Review the diff in this PR for correctness, style, and potential issues.",
-      "inputs": ["git diff HEAD~1..HEAD"]
+      "description": "Review a GitHub Pull Request",
+      "prompt": "You are an expert code reviewer. Review the PR details and diff below. Provide constructive feedback on correctness, style, performance, security, and maintainability. Be concise but thorough.",
+      "inputs": [
+        "gh pr view $PR_NUMBER --json title,body --jq '.title + \"\\n\\n\" + .body'",
+        "gh pr diff $PR_NUMBER"
+      ]
     }
   }
 }

@@ -5,10 +5,12 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  review:
+  gemini-review:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Set up Node
         uses: actions/setup-node@v3
@@ -18,7 +20,21 @@ jobs:
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
 
+      - name: Install GitHub CLI
+        run: sudo apt-get install -y gh
+
+      - name: Authenticate GitHub CLI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "${GH_TOKEN}" | gh auth login --with-token
+
       - name: Run Gemini Review
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: gemini run review
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gemini -t review > review.txt
+
+      - name: Comment review back to PR
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment $PR_NUMBER --body "$(cat review.txt)"
