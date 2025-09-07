@@ -5,32 +5,20 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  gemini-review:
+  review:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
 
-      - name: Run Linter
-        run: |
-          # Replace this with your linting command
-          echo "Running linter..."
-
-      - name: Run Tests
-        run: |
-          # Replace this with your test command
-          echo "Running tests..."
-
       - name: Run Gemini Review
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          gemini review --github --pr ${{ github.event.pull_request.number }}
+        run: gemini run review

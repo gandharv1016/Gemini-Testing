@@ -1,12 +1,9 @@
 {
-  "version": "1.0",
-  "review": {
-    "prompt": "You are a senior software engineer performing a code review. Your primary focus is on code quality, maintainability, and adherence to best practices. Look for potential bugs, performance issues, and opportunities for simplification. Provide constructive feedback with code examples where appropriate. Do not comment on style unless it significantly impacts readability or maintainability.",
-    "ignore_files": [
-      "**/Workflows.vcxproj.user",
-      "**/*.sln",
-      "**/x64/**",
-      "**/.vs/**"
-    ]
+  "tasks": {
+    "review": {
+      "description": "Review pull requests",
+      "prompt": "You are a code reviewer. Review the diff in this PR for correctness, style, and potential issues.",
+      "inputs": ["git diff HEAD~1..HEAD"]
+    }
   }
 }
