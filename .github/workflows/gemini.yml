@@ -14,10 +14,20 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install Gemini CLI
         run: npm install -g @google/gemini-cli
+
+      - name: Run Linter
+        run: |
+          # Replace this with your linting command
+          echo "Running linter..."
+
+      - name: Run Tests
+        run: |
+          # Replace this with your test command
+          echo "Running tests..."
 
       - name: Run Gemini Review
         env:
