@@ -59,12 +59,22 @@ int main() {
     cout << "Linked list: ";
     traverseLinkedList(head);
 
+    
+
     // Delete node with value 2
     deleteNode(head, 2);
 
     // Traverse and print the linked list after deletion
     cout << "After deleting 2: ";
     traverseLinkedList(head);
+
+    // Free allocated memory
+    Node* current = head;
+    while (current != nullptr) {
+        Node* temp = current;
+        current = current->next;
+        delete temp;
+    }
 
     return 0;
 }
