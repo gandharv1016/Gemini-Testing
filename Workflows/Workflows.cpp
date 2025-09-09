@@ -76,5 +76,7 @@ int main() {
         delete temp;
     }
 
+    cout << current->data << endl;
+
     return 0;
 }
