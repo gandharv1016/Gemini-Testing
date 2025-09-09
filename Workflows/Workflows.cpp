@@ -60,12 +60,12 @@ int main() {
     traverseLinkedList(head);
 
     // Free allocated memory
-    Node* current = head;
+    /*Node* current = head;
     while (current != nullptr) {
         Node* temp = current;
         current = current->next;
         delete temp;
-    }
+    }*/
 
     // Delete node with value 2
     deleteNode(head, 2);
