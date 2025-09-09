@@ -1,0 +1,35 @@
+name: Gemini Review Bot
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  gemini-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install Gemini CLI
+        run: npm install -g @google/gemini-cli
+
+      - name: Install GitHub CLI
+        run: sudo apt-get install -y gh
+
+      - name: Run Gemini Review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title')
+          BODY=$(gh pr view $PR_NUMBER --json body --jq '.body')
+          DIFF=$(gh pr diff $PR_NUMBER)
+          gemini -p "Act as a senior code reviewer. Here's the PR title and description:\n\n$TITLE\n\n$BODY\n\nHere is the diff:\n$DIFF" > review.txt
+          gh pr comment $PR_NUMBER --body "$(cat review.txt)"
