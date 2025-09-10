@@ -49,6 +49,20 @@ void deleteNode(Node*& head, int value) {
     }
 }
 
+void addNode(Node*& head, int value) {
+    Node* newNode = createNode(value);
+    if (head == nullptr) {
+        head = newNode;
+        return;
+    }
+    Node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+
 int main() {
     // Create a simple linked list: 1 -> 2 -> 3 -> nullptr
     Node* head = createNode(1);
