@@ -76,7 +76,9 @@ int main() {
         delete temp;
     }
 
-    cout << current->data << endl;
+    cout << "After deleting 1: ";
+    traverseLinkedList(head);
+
 
     return 0;
 }
