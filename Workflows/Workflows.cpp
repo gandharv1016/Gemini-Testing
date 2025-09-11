@@ -93,6 +93,13 @@ int main() {
     cout << "After deleting 1: ";
     traverseLinkedList(head);
 
+    Node* current = head;
+    while (current != nullptr) {
+        Node* temp = current;
+        current = current->next;
+        delete temp;
+    }
+
 
     return 0;
 }
