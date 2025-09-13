@@ -62,24 +62,41 @@ void addNode(Node*& head, int value) {
     current->next = newNode;
 }
 
+// Function to add three nodes at a time
+void addThreeNodes(Node*& head, int val1, int val2, int val3) {
+    // Create the three new nodes
+    Node* node1 = createNode(val1);
+    Node* node2 = createNode(val2);
+    Node* node3 = createNode(val3);
+
+    // Link them together
+    node1->next = node2;
+    node2->next = node3;
+
+    // If the list is empty, the first new node becomes the head
+    if (head == nullptr) {
+        head = node1;
+        return;
+    }
+
+    // Find the end of the list
+    Node* current = head;
+    while (current->next != nullptr) {
+        current = current->next;
+    }
+
+    // Append the new chain of nodes
+    current->next = node1;
+}
 
 int main() {
-    // Create a simple linked list: 1 -> 2 -> 3 -> nullptr
-    Node* head = createNode(1);
-    head->next = createNode(2);
-    head->next->next = createNode(3);
+    Node* head = nullptr; // Start with an empty list
 
-    // Traverse and print the linked list
-    cout << "Linked list: ";
-    traverseLinkedList(head);
+    // Add three nodes at once
+    cout << "Adding 10, 11, 12..." << std::endl;
+    addThreeNodes(head, 10, 11, 12);
 
-    
-
-    // Delete node with value 2
-    deleteNode(head, 2);
-
-    // Traverse and print the linked list after deletion
-    cout << "After deleting 2: ";
+    cout << "List after adding three nodes: ";
     traverseLinkedList(head);
 
     // Free allocated memory
@@ -89,17 +106,7 @@ int main() {
         current = current->next;
         delete temp;
     }
-
-    cout << "After deleting 1: ";
-    traverseLinkedList(head);
-
-    Node* current = head;
-    while (current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    }
-
+    head = nullptr; // Good practice to avoid dangling pointers
 
     return 0;
 }
