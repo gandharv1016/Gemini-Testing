@@ -73,25 +73,13 @@ int main() {
     cout << "Linked list: ";
     traverseLinkedList(head);
 
-    // Free allocated memory
-    Node* current = head;
-    while (current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    }
+    
 
     // Delete node with value 2
     deleteNode(head, 2);
 
     // Traverse and print the linked list after deletion
     cout << "After deleting 2: ";
-    // This is the code
-   // Add node with value 4 at the end
-    addNode(head, 4);
-
-    // Traverse and print the linked list after adding 4
-    cout << "After adding 4: ";
     traverseLinkedList(head);
 
     // Free allocated memory
@@ -103,6 +91,7 @@ int main() {
     }
 
     cout << "Testing" << endl;
+
 
     return 0;
 }
