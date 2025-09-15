@@ -102,5 +102,7 @@ int main() {
         delete temp;
     }
 
+    cout << "Testing" << endl;
+
     return 0;
 }
