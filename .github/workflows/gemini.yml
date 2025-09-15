@@ -31,5 +31,5 @@ jobs:
           TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title')
           BODY=$(gh pr view $PR_NUMBER --json body --jq '.body')
           DIFF=$(gh pr diff $PR_NUMBER)
-          gemini -p "Act as a senior code reviewer. Here's the PR title and description:\n\n$TITLE\n\n$BODY\n\nHere is the diff:\n$DIFF" > review.txt
+          gemini -m gemini-2.5-flash -p "Act as a senior code reviewer. Here's the PR title and description:\n\n$TITLE\n\n$BODY\n\nHere is the diff:\n$DIFF" > review.txt
           gh pr comment $PR_NUMBER --body "$(cat review.txt)"
