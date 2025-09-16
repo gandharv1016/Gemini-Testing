@@ -106,6 +106,7 @@ int main() {
         current = current->next;
         delete temp;
     }
+
     head = nullptr; // Good practice to avoid dangling pointers
 
     return 0;
