@@ -90,15 +90,7 @@ int main() {
         delete temp;
     }
 
-    cout << "After deleting 1: ";
-    traverseLinkedList(head);
-
-    Node* current = head;
-    while (current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    }
+    cout << "Testing" << endl;
 
 
     return 0;
