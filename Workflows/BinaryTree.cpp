@@ -29,6 +29,17 @@ void inorderTraversal(TreeNode* root) {
     inorderTraversal(root->right);     // Traverse the right subtree
 }
 
+// Function to perform postorder traversal of a binary tree
+// Post-order traversal visits nodes in the order: Left, Right, Root
+void postorderTraversal(TreeNode* root) {
+    if (root == nullptr) {
+        return;
+    }
+    postorderTraversal(root->left);    // Traverse the left subtree
+    postorderTraversal(root->right);   // Traverse the right subtree
+    std::cout << root->data << " ";    // Visit the root node
+}
+
 /*
  * --- Example Usage ---
  * Note: A project can only have one 'main' function.
@@ -54,6 +65,10 @@ void inorderTraversal(TreeNode* root) {
  *
  *     std::cout << "Inorder traversal of the binary tree: ";
  *     inorderTraversal(root);
+ *     std::cout << std::endl;
+ *
+ *     std::cout << "Postorder traversal of the binary tree: ";
+ *     postorderTraversal(root);
  *     std::cout << std::endl;
  *
  *     // Remember to free the allocated memory for the tree.
