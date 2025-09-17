@@ -108,6 +108,6 @@ int main() {
     }
 
     head = nullptr; // Good practice to avoid dangling pointers
-
+    cout << head->data << endl;
     return 0;
 }
